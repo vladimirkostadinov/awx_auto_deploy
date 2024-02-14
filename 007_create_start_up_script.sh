@@ -1,0 +1,21 @@
+echo " *** AWX Deployment - Create Start Up script ***"
+#this must be executed as root
+cat <<EOF > /home/adminawx/start_awx.sh
+retry=0
+while [ \$retry -lt 60 ]; do
+    echo "Switch to AWX context" >> /home/adminawx/start_awx.log 
+	kubectl config set-context --current --namespace=awx >> /home/adminawx/start_awx.log
+    echo "Create Port forwarding ..." >> /home/adminawx/start_awx.log
+	kubectl port-forward service/awx-server-service --address 0.0.0.0 8080:80 >> /home/adminawx/start_awx.log
+	sleep 20
+	retry=$((retry+1))
+done
+EOF
+
+echo "Assign permissions over the startup script"
+chmod +x /home/adminawx/start_awx.sh
+
+echo "Create cron job"
+crontab -l > cron_file
+echo "@reboot su adminawx /home/adminawx/start_awx.sh" >> cron_file
+crontab cron_file

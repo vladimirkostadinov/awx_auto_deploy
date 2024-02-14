@@ -1,0 +1,13 @@
+echo " *** AWX Deployment - UI URL and Password ***"
+echo " "
+kubectl config set-context --current --namespace=awx
+echo " *** ======== PASSWORD =========== ***"
+echo " "
+kubectl get secret awx-server-admin-password -o jsonpath="{.data.password}" | base64 --decode; echo " "
+echo " "
+echo " *** ===========  URL ============ ***"
+echo " "
+echo " *** Reboot server and try to open UI from url: http://<server ip address>:8080 ***"
+echo " "
+echo " *** ============================= ***"
+echo " "
