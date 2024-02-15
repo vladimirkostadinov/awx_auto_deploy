@@ -15,7 +15,7 @@ EOF
 
 echo " *** AWX Deployment - Apply minikube configuration"
 kubectl apply -k /home/$AWX_SVC_USER/
-
+echo " sleep for 2 min "
 sleep 120
 
 ## create docker.io credentials for pulling POSTGRESQL docker image
