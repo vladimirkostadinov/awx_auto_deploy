@@ -2,7 +2,7 @@ source ./_variables.sh
 
 echo "*** Apply AWX configuration ***"
 echo "Create kustomization.yaml file"
-cat  <<EOF > /home/adminawx/kustomization.yaml
+cat  <<EOF > /home/$AWX_SVC_USER/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -14,7 +14,7 @@ namespace: awx
 EOF
 
 echo " *** AWX Deployment - Apply minikube configuration"
-kubectl apply -k /home/adminawx/
+kubectl apply -k /home/$AWX_SVC_USER/
 
 sleep 120
 
@@ -33,7 +33,7 @@ kubectl config set-context --current --namespace=awx
 
 # create awx-server.yaml config file and point docker creds
 echo "Create awx-server.yaml config file and point image pull creds with name awx-registry-secret"
-cat  <<EOF > /home/adminawx/awx-server.yaml
+cat  <<EOF > /home/$AWX_SVC_USER/awx-server.yaml
 ---
 apiVersion: awx.ansible.com/v1beta1
 kind: AWX
@@ -46,7 +46,7 @@ spec:
 EOF
 
 echo "Update kustomization.yaml file - add awx-server.yaml config file"
-cat  <<EOF > /home/adminawx/kustomization.yaml
+cat  <<EOF > /home/$AWX_SVC_USER/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -59,4 +59,4 @@ namespace: awx
 EOF
 
 echo "Apply consolidated configuration ..."
-kubectl apply -k /home/adminawx/
+kubectl apply -k /home/$AWX_SVC_USER/
