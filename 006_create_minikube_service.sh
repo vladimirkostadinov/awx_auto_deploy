@@ -14,7 +14,7 @@ RemainAfterExit=yes
 WorkingDirectory=/home/adminawx
 ExecStart=/usr/local/bin/minikube start
 ExecStop=/usr/local/bin/minikube stop
-User=adminawx
+User=$AWX_SVC_USER
 Group=sudo
 
 [Install]
