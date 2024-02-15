@@ -11,7 +11,7 @@ sudo usermod -aG docker $AWX_SVC_USER
 docker --version
 
 echo " *** AWX Deployment - Create Docker Nework *** "
-docker network create --subnet 192.168.0.0/16 --driver bridge minikube
+docker network create --subnet 192.168.107.0/24 --driver bridge minikube
 
 ############
 
