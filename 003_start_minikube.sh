@@ -1,6 +1,6 @@
 echo " *** AWX Deployment - Start Minikube *** "
-
-minikube start --cpus=4 --memory=12g --addons=ingress
+source ./_variables.sh
+minikube start --cpus=$AWX_CPU --memory=$AWX_RAM --addons=ingress
 
 kubectl version
 minikube status
