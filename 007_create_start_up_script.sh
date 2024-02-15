@@ -13,9 +13,9 @@ done
 EOF
 
 echo "Assign permissions over the startup script"
-chmod +x /home/adminawx/start_awx.sh
+chmod +x /home/$AWX_SVC_USER/start_awx.sh
 
 echo "Create cron job"
 crontab -l > cron_file
-echo "@reboot su adminawx /home/adminawx/start_awx.sh" >> cron_file
+echo "@reboot su $AWX_SVC_USER /home/adminawx/start_awx.sh" >> cron_file
 crontab cron_file
