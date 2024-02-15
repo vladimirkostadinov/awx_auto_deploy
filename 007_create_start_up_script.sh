@@ -1,5 +1,5 @@
 echo " *** AWX Deployment - Create Start Up script ***"
-#this must be executed as root
+source ./_variables.sh
 cat <<EOF > /home/$AWX_SVC_USER/start_awx.sh
 retry=0
 while [ \$retry -lt 60 ]; do
