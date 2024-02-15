@@ -1,6 +1,6 @@
 echo " *** AWX Deployment - Create Minikube Service *** "
 source ./_variables.sh
-#this must be executed as root
+
 cat  <<EOF > /usr/lib/systemd/system/minikube.service
 [Unit]
 Description=minikube
