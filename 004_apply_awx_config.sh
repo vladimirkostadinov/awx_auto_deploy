@@ -2,7 +2,7 @@ source ./_variables.sh
 
 echo "*** Apply AWX configuration ***"
 echo "Create kustomization.yaml file"
-cat  <<EOF > ./kustomization.yaml
+cat  <<EOF > /home/adminawx/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -14,13 +14,11 @@ namespace: awx
 EOF
 
 echo " *** AWX Deployment - Apply minikube configuration"
-kubectl apply -k .
+kubectl apply -k /home/adminawx/
 
 sleep 120
 
 ## create docker.io credentials for pulling POSTGRESQL docker image
-#DOCKERHUB_USERNAME=vladimirkst
-#DOCKERHUB_PASSWORD=K0st@d1n0v
 
 echo "Create docker.io credentials with name awx-registry-secret for pulling POSTGRESQL docker image"
 kubectl -n awx create secret docker-registry awx-registry-secret \
@@ -35,7 +33,7 @@ kubectl config set-context --current --namespace=awx
 
 # create awx-server.yaml config file and point docker creds
 echo "Create awx-server.yaml config file and point image pull creds with name awx-registry-secret"
-cat  <<EOF > ./awx-server.yaml
+cat  <<EOF > /home/adminawx/awx-server.yaml
 ---
 apiVersion: awx.ansible.com/v1beta1
 kind: AWX
@@ -48,7 +46,7 @@ spec:
 EOF
 
 echo "Update kustomization.yaml file - add awx-server.yaml config file"
-cat  <<EOF > ./kustomization.yaml
+cat  <<EOF > /home/adminawx/kustomization.yaml
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
@@ -61,4 +59,4 @@ namespace: awx
 EOF
 
 echo "Apply consolidated configuration ..."
-kubectl apply -k .
+kubectl apply -k /home/adminawx/
