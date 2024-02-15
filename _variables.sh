@@ -3,5 +3,5 @@ DOCKERHUB_PASSWORD='your_docker_pass_account'
 AWX_VERSION='2.9.0'
 AWX_CPU='4'
 AWX_RAM='12g'
-AWX_SVC_USER="your_svc_account_username"
+AWX_SVC_USER='your_svc_account_username'
 AWX_SVC_PASS='your_svc_account_password'
