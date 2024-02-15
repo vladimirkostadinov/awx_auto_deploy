@@ -23,8 +23,8 @@ sleep 120
 echo "Create docker.io credentials with name awx-registry-secret for pulling POSTGRESQL docker image"
 kubectl -n awx create secret docker-registry awx-registry-secret \
     --docker-server=docker.io \
-    --docker-username=${DOCKERHUB_USERNAME} \
-    --docker-password=${DOCKERHUB_PASSWORD}
+    --docker-username=$DOCKERHUB_USERNAME \
+    --docker-password=$DOCKERHUB_PASSWORD
 echo "Set permissions over default service account for pulling requests with awx-registry-secret"
 kubectl -n awx patch serviceaccount default -p '{"imagePullSecrets": [{"name": "awx-registry-secret"}]}'
 
