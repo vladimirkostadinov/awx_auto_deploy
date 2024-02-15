@@ -1,5 +1,5 @@
 echo " *** AWX Deployment - Create Minikube Service *** "
-
+source ./_variables.sh
 #this must be executed as root
 cat  <<EOF > /usr/lib/systemd/system/minikube.service
 [Unit]
@@ -11,7 +11,7 @@ Requires=docker.socket containerd.service docker.service
 [Service]
 Type=oneshot
 RemainAfterExit=yes
-WorkingDirectory=/home/adminawx
+WorkingDirectory=/home/$AWX_SVC_USER
 ExecStart=/usr/local/bin/minikube start
 ExecStop=/usr/local/bin/minikube stop
 User=$AWX_SVC_USER
