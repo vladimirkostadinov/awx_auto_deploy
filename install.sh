@@ -1,4 +1,4 @@
-source ./common.sh
+source ./_variables.sh
 ./000_install_prerequisites.sh
 ./001_install_docker.sh
 ./002_install_minikube.sh
